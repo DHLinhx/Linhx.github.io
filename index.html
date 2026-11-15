@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặng Hoàng Lĩnh | SecOps & System Administrator Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Space Grotesk, Inter, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        obsidian: '#060913',
+                        slateDark: '#0b1120',
+                        neonCyan: '#00f2fe',
+                        neonEmerald: '#10b981',
+                        neonPurple: '#8b5cf6',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'scanline': 'scanline 8s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        scanline: {
+                            '0%': { transform: 'translateY(-100%)' },
+                            '100%': { transform: 'translateY(1000%)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --cyan: #00f2fe;
+            --emerald: #10b981;
+            --purple: #8b5cf6;
+            --bg-dark: #060913;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #e2e8f0;
+            overflow-x: hidden;
+            selection-background-color: #00f2fe;
+            selection-color: #060913;
+        }
+
+        ::selection {
+            background: rgba(0, 242, 254, 0.3);
+            color: #00f2fe;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060913;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 242, 254, 0.2);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00f2fe;
+        }
+
+        /* Glassmorphism Cards */
+        .cyber-glass {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cyber-glass:hover {
+            border-color: rgba(0, 242, 254, 0.4);
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.12), inset 0 0 15px rgba(0, 242, 254, 0.05);
+        }
+
+        /* 3D Tilt Wrapper */
+        .tilt-card {
+            transform-style: preserve-3d;
+            will-change: transform;
+            transition: transform 0.15s cubic-bezier(0.03, 0.98, 0.52, 0.99);
+        }
+        .tilt-content {
+            transform: translateZ(20px);
+        }
+
+        /* Glitch Effect */
+        .glitch-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+        .glitch-text:hover::before {
+            left: 2px;
+            text-shadow: -2px 0 #00f2fe;
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim-1 2s infinite linear alternate-reverse;
+        }
+        .glitch-text:hover::after {
+            left: -2px;
+            text-shadow: -2px 0 #8b5cf6;
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim-2 2s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim-1 {
+            0% { clip: rect(15px, 9999px, 81px, 0); }
+            25% { clip: rect(62px, 9999px, 12px, 0); }
+            50% { clip: rect(33px, 9999px, 94px, 0); }
+            75% { clip: rect(89px, 9999px, 44px, 0); }
+            100% { clip: rect(8px, 9999px, 67px, 0); }
+        }
+        @keyframes glitch-anim-2 {
+            0% { clip: rect(72px, 9999px, 19px, 0); }
+            25% { clip: rect(12px, 9999px, 55px, 0); }
+            50% { clip: rect(94px, 9999px, 28px, 0); }
+            75% { clip: rect(41px, 9999px, 88px, 0); }
+            100% { clip: rect(53px, 9999px, 11px, 0); }
+        }
+
+        /* Custom Cursor */
+        #cursor-dot, #cursor-ring {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease;
+        }
+        #cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #00f2fe;
+            border-radius: 50%;
+            box-shadow: 0 0 12px #00f2fe;
+        }
+        #cursor-ring {
+            width: 36px;
+            height: 36px;
+            border: 1.5px solid rgba(0, 242, 254, 0.5);
+            border-radius: 50%;
+            transition: width 0.2s, height 0.2s, border-color 0.2s, background-color 0.2s;
+        }
+        .cursor-hover #cursor-ring {
+            width: 54px;
+            height: 54px;
+            border-color: #10b981;
+            background-color: rgba(16, 185, 129, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            #cursor-dot, #cursor-ring {
+                display: none;
+            }
+        }
+
+        /* Grid Pattern Overlay */
+        .bg-grid-pattern {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+
+        /* Neon Text Gradients */
+        .text-gradient-cyber {
+            background: linear-gradient(135deg, #00f2fe 0%, #10b981 50%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Terminal Cursor Blink */
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="relative min-h-screen antialiased selection:bg-cyan-500/30 selection:text-cyan-300">
+
+    <!-- Custom Glowing Cursor -->
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+
+    <!-- Interactive Network Topology Canvas Background -->
+    <canvas id="network-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-75"></canvas>
+    <div class="fixed inset-0 bg-grid-pattern pointer-events-none z-0"></div>
+
+    <!-- Subtle Ambient Glow Blobs -->
+    <div class="fixed top-[-10%] left-[-10%] w-96 h-96 bg-neonCyan/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-96 h-96 bg-neonPurple/15 rounded-full blur-[130px] pointer-events-none z-0"></div>
+
+    <!-- Sticky Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-obsidian/80 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#hero" class="flex items-center gap-3 group interactive-el">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-neonCyan/20 to-neonPurple/20 border border-neonCyan/50 flex items-center justify-center shadow-[0_0_15px_rgba(0,242,254,0.3)] group-hover:scale-105 transition">
+                    <i data-lucide="shield-check" class="w-5 h-5 text-neonCyan"></i>
+                </div>
+                <div>
+                    <span class="font-display font-bold text-lg tracking-tight text-white">ĐẶNG HOÀNG LĨNH</span>
+                    <span class="block font-mono text-[10px] text-neonEmerald tracking-widest">SECOPS // SYSADMIN</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-6 font-mono text-xs uppercase tracking-wider text-slate-300">
+                <a href="#about" class="hover:text-neonCyan transition interactive-el" data-i18n="nav_about">Hồ Sơ</a>
+                <a href="#arsenal" class="hover:text-neonCyan transition interactive-el" data-i18n="nav_arsenal">Kho Vũ Khí</a>
+                <a href="#terminal-sec" class="hover:text-neonEmerald transition flex items-center gap-1 interactive-el">
+                    <span class="w-2 h-2 rounded-full bg-neonEmerald animate-ping"></span>
+                    Terminal
+                </a>
+                <a href="#projects" class="hover:text-neonCyan transition interactive-el" data-i18n="nav_projects">Lab & Dự Án</a>
+                <a href="#contact" class="hover:text-neonCyan transition interactive-el" data-i18n="nav_contact">Liên Hệ</a>
+            </nav>
+
+            <!-- Action Controls -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Sound FX Toggle -->
+                <button id="sound-toggle" title="Toggle Sci-Fi Sound FX" class="p-2 rounded-lg cyber-glass text-neonCyan hover:bg-white/5 transition interactive-el flex items-center gap-1.5 text-xs font-mono">
+                    <i data-lucide="volume-2" id="sound-icon" class="w-4 h-4"></i>
+                    <span id="sound-label" class="hidden sm:inline">SFX: ON</span>
+                </button>
+
+                <!-- Language Switcher -->
+                <button id="lang-toggle" class="px-3 py-1.5 rounded-lg cyber-glass font-mono text-xs font-semibold text-white hover:border-neonCyan transition interactive-el flex items-center gap-1.5">
+                    <i data-lucide="globe" class="w-3.5 h-3.5 text-neonEmerald"></i>
+                    <span id="lang-label">VI</span>
+                </button>
+
+                <!-- Download Single-File HTML -->
+                <button id="download-btn" class="px-3.5 py-2 rounded-lg bg-gradient-to-r from-neonCyan to-neonEmerald text-obsidian font-mono text-xs font-bold shadow-[0_0_20px_rgba(0,242,254,0.4)] hover:shadow-[0_0_30px_rgba(0,242,254,0.7)] hover:scale-105 transition flex items-center gap-1.5 interactive-el">
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                    <span class="hidden lg:inline" data-i18n="btn_download">Tải File .HTML</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="relative z-10 pt-24 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-28">
+
+        <!-- ================= HERO SECTION ================= -->
+        <section id="hero" class="min-h-[82vh] flex flex-col justify-center pt-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                
+                <!-- Left Column: Intro & CTA -->
+                <div class="lg:col-span-7 space-y-6">
+                    <!-- Status Badge -->
+                    <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-neonEmerald font-mono text-xs">
+                        <span class="relative flex h-2.5 w-2.5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                        </span>
+                        <span>SYSTEM ONLINE // SECOPS READY // HCMUTE 25162073</span>
+                    </div>
+
+                    <!-- Main Title with Glitch -->
+                    <div class="space-y-2">
+                        <p class="font-mono text-sm text-neonCyan tracking-widest uppercase" data-i18n="hero_greeting">Xin chào, hệ thống định danh tôi là:</p>
+                        <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white glitch-wrapper">
+                            <span class="glitch-text" data-text="ĐẶNG HOÀNG LĨNH">ĐẶNG HOÀNG LĨNH</span>
+                        </h1>
+                    </div>
+
+                    <!-- Dynamic Typewriter Role -->
+                    <div class="h-10 flex items-center font-mono text-lg sm:text-2xl text-slate-300">
+                        <span class="text-neonPurple mr-2">&gt;</span>
+                        <span id="typewriter-text" class="text-gradient-cyber font-bold"></span>
+                        <span class="w-2.5 h-6 bg-neonCyan ml-1 cursor-blink"></span>
+                    </div>
+
+                    <!-- Bio Description -->
+                    <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl" data-i18n="hero_bio">
+                        Sinh viên ngành <strong class="text-white">An toàn Thông tin tại ĐH Sư phạm Kỹ thuật TP.HCM (HCMUTE)</strong>. Đam mê kiến trúc mạng doanh nghiệp (EVE-NG, Cisco, MikroTik), quản trị hệ thống Linux chuyên sâu (CompTIA Linux+ XK0-005), bảo mật chiều sâu (Defense-in-Depth) và xây dựng hệ thống tự động hóa thông minh.
+                    </p>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-wrap items-center gap-4 pt-2">
+                        <a href="#terminal-sec" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-neonCyan via-teal-400 to-neonEmerald text-obsidian font-display font-bold text-sm tracking-wide shadow-[0_0_25px_rgba(0,242,254,0.35)] hover:shadow-[0_0_35px_rgba(0,242,254,0.65)] hover:-translate-y-0.5 transition flex items-center gap-2 interactive-el">
+                            <i data-lucide="terminal" class="w-4 h-4"></i>
+                            <span data-i18n="hero_cta_terminal">Khởi chạy SecOps Terminal</span>
+                        </a>
+                        <a href="#projects" class="px-6 py-3.5 rounded-xl cyber-glass text-white font-display font-medium text-sm hover:border-neonCyan hover:text-neonCyan transition flex items-center gap-2 interactive-el">
+                            <i data-lucide="layers" class="w-4 h-4 text-neonPurple"></i>
+                            <span data-i18n="hero_cta_projects">Khám phá Lab & Dự án</span>
+                        </a>
+                    </div>
+
+                    <!-- Quick Telemetry Stats -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6">
+                        <div class="cyber-glass p-3.5 rounded-xl border-l-2 border-l-neonCyan">
+                            <div class="font-mono text-xs text-slate-400">TARGET CERT</div>
+                            <div class="font-display font-bold text-lg text-white mt-0.5">Linux+ XK0-005</div>
+                            <div class="text-[11px] font-mono text-neonCyan">CompTIA Prep</div>
+                        </div>
+                        <div class="cyber-glass p-3.5 rounded-xl border-l-2 border-l-neonEmerald">
+                            <div class="font-mono text-xs text-slate-400">OS ENVIRONMENT</div>
+                            <div class="font-display font-bold text-lg text-white mt-0.5">Parrot OS</div>
+                            <div class="text-[11px] font-mono text-neonEmerald">Dual-Boot / Kernel</div>
+                        </div>
+                        <div class="cyber-glass p-3.5 rounded-xl border-l-2 border-l-neonPurple">
+                            <div class="font-mono text-xs text-slate-400">VIRTUAL LABS</div>
+                            <div class="font-display font-bold text-lg text-white mt-0.5">EVE-NG Pro</div>
+                            <div class="text-[11px] font-mono text-neonPurple">OSPF / BGP / VLAN</div>
+                        </div>
+                        <div class="cyber-glass p-3.5 rounded-xl border-l-2 border-l-amber-400">
+                            <div class="font-mono text-xs text-slate-400">PHILOSOPHY</div>
+                            <div class="font-display font-bold text-lg text-white mt-0.5">SecOps</div>
+                            <div class="text-[11px] font-mono text-amber-400">Defense-in-Depth</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Interactive Cyber Hologram ID Card -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="tilt-card w-full max-w-md cyber-glass rounded-2xl p-6 relative overflow-hidden border border-neonCyan/30 shadow-[0_0_50px_rgba(0,242,254,0.12)]">
+                        <!-- Animated Scanline -->
+                        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-neonCyan/5 to-transparent h-24 w-full animate-scanline pointer-events-none"></div>
+
+                        <div class="tilt-content space-y-5">
+                            <!-- Card Top Header -->
+                            <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="cpu" class="w-5 h-5 text-neonCyan"></i>
+                                    <span class="font-mono text-xs font-bold tracking-wider text-white">HCMUTE // INFOSEC ID</span>
+                                </div>
+                                <span class="px-2.5 py-0.5 rounded bg-neonCyan/10 border border-neonCyan/40 font-mono text-[11px] text-neonCyan">CLEARANCE: LVL-4</span>
+                            </div>
+
+                            <!-- Avatar & Core Identity -->
+                            <div class="flex items-center gap-4">
+                                <div class="relative w-20 h-20 rounded-2xl bg-gradient-to-tr from-slate-900 via-cyan-950 to-purple-950 border-2 border-neonCyan flex items-center justify-center shadow-[0_0_20px_rgba(0,242,254,0.3)] shrink-0">
+                                    <span class="font-display font-bold text-2xl text-gradient-cyber">ĐHL</span>
+                                    <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-neonEmerald border-2 border-obsidian"></span>
+                                </div>
+                                <div>
+                                    <h2 class="font-display font-bold text-xl text-white">Đặng Hoàng Lĩnh</h2>
+                                    <p class="font-mono text-xs text-neonCyan">MSSV: 25162073</p>
+                                    <p class="font-mono text-xs text-slate-400 mt-1">Ho Chi Minh City, Vietnam</p>
+                                </div>
+                            </div>
+
+                            <!-- Live System Telemetry Bars -->
+                            <div class="space-y-2.5 bg-obsidian/70 p-4 rounded-xl border border-white/5 font-mono text-xs">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-400">KERNEL:</span>
+                                    <span class="text-neonEmerald">Linux 6.x-parrot-amd64</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-400">ARCHITECTURE:</span>
+                                    <span class="text-white">Dual-Boot NVMe (Win11 + Parrot)</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-400">ROUTING STACK:</span>
+                                    <span class="text-neonCyan">Cisco IOU/IOL &bull; MikroTik RouterOS</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-400">BRAIN VAULT:</span>
+                                    <span class="text-neonPurple">Obsidian + Multi-Agent AI</span>
+                                </div>
+                            </div>
+
+                            <!-- Interactive Mini Radar / Node Status -->
+                            <div class="grid grid-cols-3 gap-2 text-center font-mono text-[11px]">
+                                <div class="p-2 rounded-lg bg-white/5 border border-white/5">
+                                    <div class="text-slate-400">FIREWALL</div>
+                                    <div class="text-neonEmerald font-bold mt-0.5">ACTIVE</div>
+                                </div>
+                                <div class="p-2 rounded-lg bg-white/5 border border-white/5">
+                                    <div class="text-slate-400">IDS / SIEM</div>
+                                    <div class="text-neonCyan font-bold mt-0.5">MONITORING</div>
+                                </div>
+                                <div class="p-2 rounded-lg bg-white/5 border border-white/5">
+                                    <div class="text-slate-400">UPTIME</div>
+                                    <div id="live-uptime" class="text-amber-400 font-bold mt-0.5">99.98%</div>
+                                </div>
+                            </div>
+
+                            <!-- Card Footer Barcode Look -->
+                            <div class="pt-2 flex items-center justify-between text-[10px] font-mono text-slate-500">
+                                <span>SHA256: 8F9B...25162073...E4A1</span>
+                                <span class="text-neonCyan">VERIFIED</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= ABOUT & ARCHITECTURE BENTO GRID ================= -->
+        <section id="about" class="space-y-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/10 pb-4">
+                <div>
+                    <div class="font-mono text-xs text-neonCyan uppercase tracking-widest mb-1">// 01. SYSTEM ARCHITECTURE & BIO</div>
+                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-white" data-i18n="about_title">Tư Duy Hệ Thống & Định Hướng</h2>
+                </div>
+                <p class="font-mono text-xs text-slate-400">USER_PROFILE: /home/linh/biography.md</p>
+            </div>
+
+            <!-- Bento Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                
+                <!-- Bento 1: Core Mission (7 cols) -->
+                <div class="md:col-span-7 cyber-glass rounded-2xl p-6 sm:p-8 flex flex-col justify-between tilt-card">
+                    <div class="space-y-4">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-neonCyan/10 text-neonCyan font-mono text-xs">
+                            <i data-lucide="terminal-square" class="w-4 h-4"></i>
+                            <span>CORE PHILOSOPHY</span>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-white" data-i18n="bento1_title">
+                            Từ Hạ Tầng Vật Lý Đến Bảo Mật Đa Tầng (Defense-in-Depth)
+                        </h3>
+                        <p class="text-slate-300 leading-relaxed text-sm sm:text-base" data-i18n="bento1_desc">
+                            Để bảo vệ một hệ thống, trước hết phải hiểu tường tận cách nó vận hành từ tầng vật lý (Hardware/Analog), kiến trúc thanh ghi vi xử lý (x86 Assembly), nhân hệ điều hành (Linux Kernel) cho đến định tuyến mạng diện rộng (OSPF/BGP). Mình tập trung rèn luyện kỹ năng thực chiến thông qua việc tự dựng phòng Lab ảo hóa EVE-NG và quản trị hệ thống Linux chuẩn doanh nghiệp.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4 pt-6 mt-6 border-t border-white/10 font-mono text-xs">
+                        <div>
+                            <span class="text-slate-400 block">TRƯỜNG</span>
+                            <span class="text-white font-bold">HCMUTE</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-400 block">CHUYÊN NGÀNH</span>
+                            <span class="text-neonCyan font-bold">An Toàn Thông Tin</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-400 block">MÃ SỐ SV</span>
+                            <span class="text-neonEmerald font-bold">25162073</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bento 2: Workstation & Lab Specs (5 cols) -->
+                <div class="md:col-span-5 cyber-glass rounded-2xl p-6 sm:p-8 space-y-4 tilt-card border-t-2 border-t-neonPurple">
+                    <div class="flex items-center justify-between">
+                        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-neonPurple/10 text-neonPurple font-mono text-xs">
+                            <i data-lucide="hard-drive" class="w-4 h-4"></i>
+                            <span>WORKSTATION RIG</span>
+                        </span>
+                        <span class="font-mono text-xs text-slate-400">LOCALHOST</span>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white" data-i18n="bento2_title">Môi Trường Tác Chiến Cá Nhân</h3>
+                    <ul class="space-y-3 font-mono text-xs text-slate-300">
+                        <li class="flex items-start gap-2.5">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-neonEmerald shrink-0 mt-0.5"></i>
+                            <span><strong>Dual-Drive Isolated Setup:</strong> Tách biệt hoàn toàn Windows 11 &amp; Parrot Security OS trên 2 ổ cứng vật lý độc lập.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-neonCyan shrink-0 mt-0.5"></i>
+                            <span><strong>EVE-NG Virtualization:</strong> Mô phỏng mạng doanh nghiệp đa vùng với Cisco IOU/IOL, Switch Layer 2/3 &amp; MikroTik RouterOS.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-neonPurple shrink-0 mt-0.5"></i>
+                            <span><strong>AI Second Brain:</strong> Hệ thống quản trị tri thức Obsidian kết hợp giao thức Multi-Agent AI tự động hóa nghiên cứu.</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= TECH ARSENAL & SKILLS ================= -->
+        <section id="arsenal" class="space-y-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/10 pb-4">
+                <div>
+                    <div class="font-mono text-xs text-neonEmerald uppercase tracking-widest mb-1">// 02. TECHNICAL ARSENAL</div>
+                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-white" data-i18n="arsenal_title">Hệ Sinh Thái Kỹ Năng & Công Nghệ</h2>
+                </div>
+                <!-- Category Filter Buttons -->
+                <div class="flex flex-wrap gap-2 font-mono text-xs">
+                    <button onclick="filterSkills('all')" class="skill-tab active px-3.5 py-1.5 rounded-lg bg-neonCyan text-obsidian font-bold transition interactive-el" data-tab="all">ALL STACK</button>
+                    <button onclick="filterSkills('sysadmin')" class="skill-tab px-3.5 py-1.5 rounded-lg cyber-glass text-slate-300 hover:text-white transition interactive-el" data-tab="sysadmin">SYSADMIN & LINUX</button>
+                    <button onclick="filterSkills('network')" class="skill-tab px-3.5 py-1.5 rounded-lg cyber-glass text-slate-300 hover:text-white transition interactive-el" data-tab="network">NETWORKING</button>
+                    <button onclick="filterSkills('secdev')" class="skill-tab px-3.5 py-1.5 rounded-lg cyber-glass text-slate-300 hover:text-white transition interactive-el" data-tab="secdev">SECOPS & DEV</button>
+                </div>
+            </div>
+
+            <!-- Skills Grid -->
+            <div id="skills-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- Category 1: System Administration & OS -->
+                <div class="skill-card cyber-glass rounded-2xl p-6 space-y-5 tilt-card" data-category="sysadmin">
+                    <div class="flex items-center gap-3">
+                        <div class="p-3 rounded-xl bg-neonCyan/10 border border-neonCyan/30 text-neonCyan">
+                            <i data-lucide="server" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-bold text-lg text-white">System Admin & OS</h3>
+                            <p class="font-mono text-xs text-neonCyan">CompTIA Linux+ (XK0-005)</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 font-mono text-xs">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-slate-200">Linux (Parrot OS, Ubuntu, RHEL)</span>
+                                <span class="text-neonCyan">90%</span>
+                            </div>
+                            <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-neonCyan to-teal-400 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-slate-200">Bash Scripting & Automation</span>
+                                <span class="text-neonCyan">85%</span>
+                            </div>
+                            <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-neonCyan to-teal-400 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-slate-200">System Hardening / Permissions / LVM</span>
+                                <span class="text-neonCyan">85%</span>
+                            </div>
+                            <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-neonCyan to-teal-400 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-1.5 pt-2">
+                        <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10 font-mono text-[11px] text-slate-300">systemd</span>
+                        <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10 font-mono text-[11px] text-slate-300">cron/at</span>
+                        <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10 font-mono text-[11px] text-slate-300">iptables/ufw</span>
+                        <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10 font-mono text-[11px] text-slate-300">SSH Hardening</span>
+                    </div>
+                </div>
+
+                <!-- Category 2: Networking & Infrastructure -->
+                <div class="skill-card cyber-glass rounded-2xl p-6 space-y-5 tilt-card" data-category="network">
+                    <div class="flex items-center gap-3">
+                        <div class="p-3 rounded-xl bg-neonEmerald/10 border border-neonEmerald/30 text-neonEmerald">
+                            <i data-lucide="network" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-bold text-lg text-white">Networking & Infra</h3>
+                            <p class="font-mono text-xs text-neonEmerald">Routing, Switching & Failover</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 font-mono text-xs">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-slate-200">IPv4/IPv6 & VLSM Subnetting</span>
+                                <span class="text-neonEmerald">92%</span>
+                            </div>
+                            <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-neonEmerald to-cyan-400 rounded-full" style="width: 92%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-slate-200">Cisco Routing (OSPF, BGP, VLANs)</span>
+                                <span class="text-neonEmerald">86%</span>
+                            </div>
+                            <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-neonEmerald to-cyan-400 rounded-full" style="width: 86%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-slate-200">EVE-NG & MikroTik Load Balancing</span>
+                                <span class="text-neonEmerald">88%</span>
+                            </div>
+                            <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-neonEmerald to-cyan-400 rounded-full" style="width: 88%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-1.5 pt-2">
+                        <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10 font-mono text-[11px] text-slate-300">EVE-NG</span>
+                        <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10 font-mono text-[11px] text-slate-300">Cisco IOU/IOL</span>
+                        <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10 font-mono text-[11px] text-slate-300">Wireshark</span>
+                        <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10 font-mono text-[11px] text-slate-300">RouterOS</span>
+                    </div>
+                </div>
+
+                <!-- Category 3: Security, Software & Hardware -->
+                <div class="skill-card cyber-glass rounded-2xl p-6 space-y-5 tilt-card" data-category="secdev">
+                    <div class="flex items-center gap-3">
+                        <div class="p-3 rounded-xl bg-neonPurple/10 border border-neonPurple/30 text-neonPurple">
+                            <i data-lucide="code-2" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-bold text-lg text-white">SecOps, Dev & Hardware</h3>
+                            <p class="font-mono text-xs text-neonPurple">Full-Spectrum Engineering</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 font-mono text-xs">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-slate-200">Java (OOP / Layered DAO / Stream API)</span>
+                                <span class="text-neonPurple">88%</span>
+                            </div>
+                            <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-neonPurple to-pink-500 rounded-full" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-slate-200">C/C++ & x86 Assembly Architecture</span>
+                                <span class="text-neonPurple">80%</span>
+                            </div>
+                            <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-neonPurple to-pink-500 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-slate-200">Analog Electronics (BJT, PCB, Multisim)</span>
+                                <span class="text-neonPurple">82%</span>
+                            </div>
+                            <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-neonPurple to-pink-500 rounded-full" style="width: 82%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-1.5 pt-2">
+                        <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10 font-mono text-[11px] text-slate-300">Defense-in-Depth</span>
+                        <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10 font-mono text-[11px] text-slate-300">x86 Registers</span>
+                        <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10 font-mono text-[11px] text-slate-300">LM317 / BJT</span>
+                        <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10 font-mono text-[11px] text-slate-300">Git</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= INTERACTIVE LINUX BASH TERMINAL ================= -->
+        <section id="terminal-sec" class="space-y-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <div class="font-mono text-xs text-neonEmerald uppercase tracking-widest mb-1">// 03. LIVE INTERACTIVE SHELL</div>
+                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-white" data-i18n="term_title">SecOps Bash Terminal Emulator</h2>
+                </div>
+                <p class="font-mono text-xs text-slate-400" data-i18n="term_subtitle">Bấm vào các nút lệnh nhanh hoặc gõ trực tiếp bên dưới:</p>
+            </div>
+
+            <!-- Quick Command Chips -->
+            <div class="flex flex-wrap items-center gap-2 font-mono text-xs">
+                <span class="text-slate-400 mr-1">Quick Exec:</span>
+                <button onclick="runTerminalCommand('help')" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-neonCyan/20 border border-white/10 hover:border-neonCyan text-neonCyan transition interactive-el">help</button>
+                <button onclick="runTerminalCommand('neofetch')" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-neonCyan/20 border border-white/10 hover:border-neonCyan text-neonEmerald transition interactive-el">neofetch</button>
+                <button onclick="runTerminalCommand('whoami')" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-neonCyan/20 border border-white/10 hover:border-neonCyan text-slate-200 transition interactive-el">whoami</button>
+                <button onclick="runTerminalCommand('skills')" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-neonCyan/20 border border-white/10 hover:border-neonCyan text-slate-200 transition interactive-el">skills</button>
+                <button onclick="runTerminalCommand('projects')" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-neonCyan/20 border border-white/10 hover:border-neonCyan text-slate-200 transition interactive-el">projects</button>
+                <button onclick="runTerminalCommand('certs')" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-neonCyan/20 border border-white/10 hover:border-neonCyan text-slate-200 transition interactive-el">certs</button>
+                <button onclick="runTerminalCommand('ping 8.8.8.8')" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-neonCyan/20 border border-white/10 hover:border-neonCyan text-amber-300 transition interactive-el">ping 8.8.8.8</button>
+                <button onclick="runTerminalCommand('clear')" class="px-3 py-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-400 transition interactive-el">clear</button>
+            </div>
+
+            <!-- Terminal Window -->
+            <div class="rounded-2xl overflow-hidden border border-neonCyan/30 bg-[#050811]/95 shadow-[0_0_50px_rgba(0,242,254,0.1)] backdrop-blur-xl">
+                <!-- Window Titlebar -->
+                <div class="bg-slate-900/90 px-4 py-3 border-b border-white/10 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-amber-400 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
+                        <span class="ml-3 font-mono text-xs text-slate-300 flex items-center gap-1.5">
+                            <i data-lucide="terminal" class="w-3.5 h-3.5 text-neonCyan"></i>
+                            linh@secops-lab: ~ (bash)
+                        </span>
+                    </div>
+                    <span class="font-mono text-[11px] text-neonEmerald">SSH: AES-256-GCM</span>
+                </div>
+
+                <!-- Terminal Output Body -->
+                <div id="terminal-body" class="p-5 font-mono text-xs sm:text-sm h-80 sm:h-96 overflow-y-auto space-y-2 text-slate-200" onclick="document.getElementById('terminal-input').focus()">
+                    <!-- Initial Welcome Output injected via JS -->
+                </div>
+
+                <!-- Terminal Input Line -->
+                <div class="px-5 py-3 bg-slate-950/90 border-t border-white/10 flex items-center gap-2 font-mono text-xs sm:text-sm">
+                    <span class="text-neonEmerald font-bold shrink-0">linh@secops-lab</span><span class="text-white">:</span><span class="text-neonCyan font-bold">~#</span>
+                    <input 
+                        id="terminal-input" 
+                        type="text" 
+                        autocomplete="off" 
+                        spellcheck="false"
+                        placeholder="Type 'help' or 'neofetch' and press Enter..." 
+                        class="w-full bg-transparent text-white focus:outline-none placeholder:text-slate-600"
+                    />
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= FEATURED LABS & PROJECTS ================= -->
+        <section id="projects" class="space-y-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/10 pb-4">
+                <div>
+                    <div class="font-mono text-xs text-neonPurple uppercase tracking-widest mb-1">// 04. LABS & DEPLOYMENTS</div>
+                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-white" data-i18n="proj_title">Dự Án Trọng Điểm & Phòng Lab</h2>
+                </div>
+                <p class="font-mono text-xs text-slate-400" data-i18n="proj_subtitle">Nhấn vào từng thẻ dự án để xem kiến trúc chi tiết</p>
+            </div>
+
+            <!-- Projects Grid -->
+            <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Dynamically populated via JS for clean i18n and Modal view -->
+            </div>
+        </section>
+
+        <!-- ================= CONTACT & EXPORT FOOTER ================= -->
+        <section id="contact" class="cyber-glass rounded-3xl p-8 sm:p-12 border border-neonCyan/30 relative overflow-hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-7 space-y-4">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neonCyan/10 text-neonCyan font-mono text-xs">
+                        <i data-lucide="radio" class="w-3.5 h-3.5 animate-pulse"></i>
+                        <span>OPEN FOR INTERNSHIP & COLLABORATION</span>
+                    </div>
+                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-white" data-i18n="contact_title">
+                        Kết Nối Với Đặng Hoàng Lĩnh
+                    </h2>
+                    <p class="text-slate-300 text-sm sm:text-base max-w-xl" data-i18n="contact_desc">
+                        Sẵn sàng trao đổi về cơ hội thực tập System Administrator, Network Engineer, SecOps hoặc hợp tác nghiên cứu các dự án hạ tầng mạng và bảo mật tại TP. Hồ Chí Minh.
+                    </p>
+
+                    <div class="flex flex-wrap gap-3 pt-2 font-mono text-xs">
+                        <button onclick="copyToClipboard('25162073@student.hcmute.edu.vn')" class="px-4 py-3 rounded-xl bg-white/5 hover:bg-neonCyan/20 border border-white/10 hover:border-neonCyan text-white flex items-center gap-2 transition interactive-el">
+                            <i data-lucide="mail" class="w-4 h-4 text-neonCyan"></i>
+                            <span>25162073@student.hcmute.edu.vn</span>
+                            <i data-lucide="copy" class="w-3.5 h-3.5 text-slate-400"></i>
+                        </button>
+                        <button onclick="copyToClipboard('25162073')" class="px-4 py-3 rounded-xl bg-white/5 hover:bg-neonEmerald/20 border border-white/10 hover:border-neonEmerald text-white flex items-center gap-2 transition interactive-el">
+                            <i data-lucide="hash" class="w-4 h-4 text-neonEmerald"></i>
+                            <span>MSSV: 25162073</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Box: Instant Local HTML Export -->
+                <div class="lg:col-span-5 bg-obsidian/80 p-6 rounded-2xl border border-white/10 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="p-3 rounded-xl bg-neonEmerald/10 text-neonEmerald">
+                            <i data-lucide="file-code" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-bold text-white text-lg" data-i18n="export_box_title">Chạy Trực Tiếp Trên Máy Của Bạn</h3>
+                            <p class="font-mono text-xs text-slate-400">Single-File Self-Contained Architecture</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed" data-i18n="export_box_desc">
+                        Toàn bộ giao diện, hiệu ứng Canvas 3D, âm thanh Sci-Fi và Linux Terminal này được đóng gói gọn trong 1 file HTML duy nhất. Tải về máy tính và mở bằng bất kỳ trình duyệt nào!
+                    </p>
+                    <button onclick="downloadPortfolioHTML()" class="w-full py-3 rounded-xl bg-gradient-to-r from-neonCyan to-neonEmerald text-obsidian font-display font-bold text-sm shadow-[0_0_20px_rgba(0,242,254,0.3)] hover:shadow-[0_0_30px_rgba(0,242,254,0.6)] transition flex items-center justify-center gap-2 interactive-el">
+                        <i data-lucide="download-cloud" class="w-4 h-4"></i>
+                        <span data-i18n="btn_download_full">Tải Xuống Bản Độc Lập (index.html)</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-white/10 bg-obsidian/90 py-6 text-center font-mono text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+            <span>&copy; 2026 ĐẶNG HOÀNG LĨNH (HCMUTE - 25162073). ALL SYSTEMS OPERATIONAL.</span>
+            <span class="text-neonCyan">DESIGNED WITH SECOPS GLASSMORPHISM</span>
+        </div>
+    </footer>
+
+    <!-- ================= PROJECT DETAIL MODAL ================= -->
+    <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="cyber-glass max-w-2xl w-full rounded-2xl border border-neonCyan/50 p-6 sm:p-8 space-y-5 relative animate-float" style="animation-duration: 0s;">
+            <button onclick="closeProjectModal()" class="absolute top-5 right-5 p-2 rounded-lg bg-white/5 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 transition">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div id="modal-badge" class="inline-flex items-center gap-2 px-3 py-1 rounded bg-neonCyan/10 text-neonCyan font-mono text-xs"></div>
+            <h3 id="modal-title" class="font-display text-2xl sm:text-3xl font-bold text-white"></h3>
+            <p id="modal-desc" class="text-slate-300 text-sm sm:text-base leading-relaxed"></p>
+            <div class="space-y-2">
+                <div class="font-mono text-xs text-neonEmerald uppercase">Kiến Trúc & Thông Số Kỹ Thuật:</div>
+                <ul id="modal-specs" class="space-y-1.5 font-mono text-xs text-slate-300 list-disc list-inside bg-obsidian/80 p-4 rounded-xl border border-white/10"></ul>
+            </div>
+            <div id="modal-tags" class="flex flex-wrap gap-2 pt-2"></div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 hidden items-center gap-2.5 px-4 py-3 rounded-xl cyber-glass border border-neonEmerald text-neonEmerald font-mono text-xs shadow-lg">
+        <i data-lucide="check-circle" class="w-4 h-4"></i>
+        <span id="toast-msg">Copied to clipboard!</span>
+    </div>
+
+    <!-- ================= JAVASCRIPT ENGINE ================= -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        /* ==========================================================================
+           1. WEB AUDIO API SCI-FI SOUND SYNTHESIZER (No external audio files needed)
+           ========================================================================== */
+        let soundEnabled = true;
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx && AudioCtx) {
+                audioCtx = new AudioCtx();
+            }
+        }
+
+        function playSound(type = 'click') {
+            if (!soundEnabled) return;
+            try {
+                initAudio();
+                if (!audioCtx) return;
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                const now = audioCtx.currentTime;
+                if (type === 'hover') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(900, now);
+                    osc.frequency.exponentialRampToValueAtTime(1400, now + 0.04);
+                    gain.gain.setValueAtTime(0.015, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+                    osc.start(now);
+                    osc.stop(now + 0.04);
+                } else if (type === 'click') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(520, now);
+                    osc.frequency.exponentialRampToValueAtTime(180, now + 0.08);
+                    gain.gain.setValueAtTime(0.05, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+                    osc.start(now);
+                    osc.stop(now + 0.08);
+                } else if (type === 'terminal') {
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(640, now);
+                    osc.frequency.setValueAtTime(880, now + 0.04);
+                    gain.gain.setValueAtTime(0.03, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+                    osc.start(now);
+                    osc.stop(now + 0.09);
+                }
+            } catch (e) {
+                // Ignore audio errors if blocked by autoplay policy
+            }
+        }
+
+        document.getElementById('sound-toggle').addEventListener('click', () => {
+            soundEnabled = !soundEnabled;
+            const label = document.getElementById('sound-label');
+            const btn = document.getElementById('sound-toggle');
+            label.textContent = soundEnabled ? 'SFX: ON' : 'SFX: OFF';
+            btn.classList.toggle('text-neonCyan', soundEnabled);
+            btn.classList.toggle('text-slate-500', !soundEnabled);
+            if (soundEnabled) playSound('click');
+        });
+
+        /* ==========================================================================
+           2. BILINGUAL (VI / EN) DATA & PROJECTS STORE
+           ========================================================================== */
+        let currentLang = 'vi';
+
+        const i18nData = {
+            vi: {
+                nav_about: "Hồ Sơ",
+                nav_arsenal: "Kho Vũ Khí",
+                nav_projects: "Lab & Dự Án",
+                nav_contact: "Liên Hệ",
+                btn_download: "Tải File .HTML",
+                hero_greeting: "Xin chào, hệ thống định danh tôi là:",
+                hero_bio: "Sinh viên ngành <strong class='text-white'>An toàn Thông tin tại ĐH Sư phạm Kỹ thuật TP.HCM (HCMUTE)</strong>. Đam mê kiến trúc mạng doanh nghiệp (EVE-NG, Cisco, MikroTik), quản trị hệ thống Linux chuyên sâu (CompTIA Linux+ XK0-005), bảo mật chiều sâu (Defense-in-Depth) và xây dựng hệ thống tự động hóa thông minh.",
+                hero_cta_terminal: "Khởi chạy SecOps Terminal",
+                hero_cta_projects: "Khám phá Lab & Dự án",
+                about_title: "Tư Duy Hệ Thống & Định Hướng",
+                bento1_title: "Từ Hạ Tầng Vật Lý Đến Bảo Mật Đa Tầng (Defense-in-Depth)",
+                bento1_desc: "Để bảo vệ một hệ thống, trước hết phải hiểu tường tận cách nó vận hành từ tầng vật lý (Hardware/Analog), kiến trúc thanh ghi vi xử lý (x86 Assembly), nhân hệ điều hành (Linux Kernel) cho đến định tuyến mạng diện rộng (OSPF/BGP). Mình tập trung rèn luyện kỹ năng thực chiến thông qua việc tự dựng phòng Lab ảo hóa EVE-NG và quản trị hệ thống Linux chuẩn doanh nghiệp.",
+                bento2_title: "Môi Trường Tác Chiến Cá Nhân",
+                arsenal_title: "Hệ Sinh Thái Kỹ Năng & Công Nghệ",
+                term_title: "SecOps Bash Terminal Emulator",
+                term_subtitle: "Bấm vào các nút lệnh nhanh hoặc gõ trực tiếp bên dưới:",
+                proj_title: "Dự Án Trọng Điểm & Phòng Lab",
+                proj_subtitle: "Nhấn vào từng thẻ dự án để xem kiến trúc chi tiết",
+                contact_title: "Kết Nối Với Đặng Hoàng Lĩnh",
+                contact_desc: "Sẵn sàng trao đổi về cơ hội thực tập System Administrator, Network Engineer, SecOps hoặc hợp tác nghiên cứu các dự án hạ tầng mạng và bảo mật tại TP. Hồ Chí Minh.",
+                export_box_title: "Chạy Trực Tiếp Trên Máy Của Bạn",
+                export_box_desc: "Toàn bộ giao diện, hiệu ứng Canvas 3D, âm thanh Sci-Fi và Linux Terminal này được đóng gói gọn trong 1 file HTML duy nhất. Tải về máy tính và mở bằng bất kỳ trình duyệt nào!",
+                btn_download_full: "Tải Xuống Bản Độc Lập (index.html)",
+                roles: [
+                    "Sinh viên An Toàn Thông Tin @ HCMUTE",
+                    "Aspiring System Administrator",
+                    "SecOps & Network Infrastructure Engineer",
+                    "Linux Kernel & EVE-NG Lab Enthusiast"
+                ]
+            },
+            en: {
+                nav_about: "Profile",
+                nav_arsenal: "Tech Arsenal",
+                nav_projects: "Labs & Projects",
+                nav_contact: "Contact",
+                btn_download: "Export .HTML",
+                hero_greeting: "Greetings, system identity verified as:",
+                hero_bio: "Information Security Student at <strong class='text-white'>Ho Chi Minh City University of Technology and Education (HCMUTE)</strong>. Passionate about enterprise network topology (EVE-NG, Cisco, MikroTik), Linux System Administration (CompTIA Linux+ XK0-005), Defense-in-Depth security, and intelligent automation.",
+                hero_cta_terminal: "Launch SecOps Terminal",
+                hero_cta_projects: "Explore Labs & Projects",
+                about_title: "System Mindset & Architecture",
+                bento1_title: "From Bare-Metal Hardware to Defense-in-Depth Security",
+                bento1_desc: "Securing an infrastructure requires mastering every layer: from analog electronics and x86 CPU registers to the Linux Kernel and multi-area enterprise routing (OSPF/BGP). I focus on hands-on engineering through self-hosted EVE-NG virtual labs and enterprise-grade Linux hardening.",
+                bento2_title: "Personal Operations Workstation",
+                arsenal_title: "Technical Arsenal & Stack",
+                term_title: "SecOps Bash Terminal Emulator",
+                term_subtitle: "Click quick-exec chips or type commands directly below:",
+                proj_title: "Featured Labs & Deployments",
+                proj_subtitle: "Click on any card to inspect full architectural specs",
+                contact_title: "Connect With Đặng Hoàng Lĩnh",
+                contact_desc: "Open for System Administrator, Network Engineer, and SecOps internship opportunities or technical collaborations in Ho Chi Minh City.",
+                export_box_title: "Run Locally On Your Machine",
+                export_box_desc: "This entire portfolio—including the 3D Network Canvas, Web Audio synth, and Linux Terminal—is packed into a single self-contained HTML file.",
+                btn_download_full: "Download Standalone File (index.html)",
+                roles: [
+                    "Information Security Student @ HCMUTE",
+                    "Aspiring System Administrator",
+                    "SecOps & Network Infrastructure Engineer",
+                    "Linux & Infrastructure Enthusiast"
+                ]
+            }
+        };
+
+        const projectsData = [
+            {
+                id: "eveng-lab",
+                icon: "router",
+                accent: "neonCyan",
+                badge: "NETWORK INFRASTRUCTURE LAB",
+                title: {
+                    vi: "Kiến Trúc Mạng Doanh Nghiệp Ảo Hóa (EVE-NG)",
+                    en: "Enterprise Virtual Network Topology Lab (EVE-NG)"
+                },
+                shortDesc: {
+                    vi: "Thiết kế và triển khai mô hình mạng doanh nghiệp đa vùng với định tuyến động OSPF/BGP, phân đoạn VLAN và cân bằng tải MikroTik.",
+                    en: "Designed a multi-area enterprise network topology featuring OSPF/BGP dynamic routing, VLAN segmentation, and MikroTik failover."
+                },
+                specs: {
+                    vi: [
+                        "Triển khai Cisco IOU/IOL Layer 2 & Layer 3 trên nền tảng ảo hóa EVE-NG.",
+                        "Quy hoạch địa chỉ IPv4/IPv6 và chia Subnet tối ưu bằng kỹ thuật VLSM.",
+                        "Cấu hình định tuyến đa vùng OSPF, eBGP/iBGP và cơ chế dự phòng cổng HSRP/VRRP.",
+                        "Tích hợp RouterOS MikroTik cân bằng tải đa đường truyền (Multi-WAN Failover)."
+                    ],
+                    en: [
+                        "Deployed Cisco IOU/IOL L2/L3 images inside EVE-NG virtualized environment.",
+                        "Engineered custom IPv4/IPv6 addressing schemes and VLSM subnetting.",
+                        "Configured multi-area OSPF, BGP peering, and VLAN trunking/inter-VLAN routing.",
+                        "Integrated MikroTik RouterOS for Multi-WAN load balancing and automatic failover."
+                    ]
+                },
+                tags: ["EVE-NG", "Cisco IOU/IOL", "OSPF / BGP", "VLAN", "MikroTik", "VLSM"]
+            },
+            {
+                id: "ai-brain",
+                icon: "brain-circuit",
+                accent: "neonPurple",
+                accentHex: "#8b5cf6",
+                badge: "AI ORCHESTRATION & PKM",
+                title: {
+                    vi: "Kiến Trúc 'Second Brain' Đa Tác Tử (Multi-Agent AI)",
+                    en: "Multi-Agent AI Second Brain Architecture"
+                },
+                shortDesc: {
+                    vi: "Hệ thống quản trị tri thức cá nhân trên Obsidian được điều phối bởi các giao thức Agent tự động hóa việc tổng hợp và truy xuất kiến thức.",
+                    en: "Obsidian knowledge vault orchestrated with custom multi-agent protocols for automated technical synthesis and structured recall."
+                },
+                specs: {
+                    vi: [
+                        "Xây dựng cấu trúc liên kết tri thức (Graph Knowledge Base) phục vụ ôn luyện CompTIA Linux+ và An toàn thông tin.",
+                        "Thiết kế luồng phân tách nhiệm vụ cho các AI Agent (Researcher, Critic, Synthesizer).",
+                        "Chuẩn hóa tài liệu kỹ thuật bằng Markdown, sơ đồ Mermaid và metadata tự động."
+                    ],
+                    en: [
+                        "Architected an interconnected Obsidian Graph vault for CompTIA Linux+ & InfoSec mastery.",
+                        "Designed custom system prompts and multi-agent workflows for technical note synthesis.",
+                        "Standardized documentation pipelines with Markdown, Mermaid diagrams, and YAML frontmatter."
+                    ]
+                },
+                tags: ["Obsidian", "Multi-Agent AI", "Knowledge Graph", "Automation", "Markdown"]
+            },
+            {
+                id: "hrms-java",
+                icon: "database",
+                accent: "neonEmerald",
+                badge: "SOFTWARE ARCHITECTURE",
+                title: {
+                    vi: "Hệ Thống Quản Trị Nhân Sự (Java OOP / Layered DAO)",
+                    en: "Human Resource Management System (Java OOP)"
+                },
+                shortDesc: {
+                    vi: "Phần mềm quản lý nhân sự áp dụng chuẩn kiến trúc phân tầng DAO, xử lý dữ liệu lớn bằng Java Stream API và nguyên lý SOLID.",
+                    en: "Enterprise-pattern HR system built with strict Object-Oriented Programming, layered DAO architecture, and Java Stream API analytics."
+                },
+                specs: {
+                    vi: [
+                        "Tách biệt rõ ràng các tầng Presentation, Business Service và Data Access Object (DAO).",
+                        "Ứng dụng Java Stream API & Lambda Expressions để truy vấn, thống kê lương thưởng hiệu năng cao.",
+                        "Kiểm soát ngoại lệ chặt chẽ, đảm bảo tính toàn vẹn dữ liệu và dễ mở rộng."
+                    ],
+                    en: [
+                        "Decoupled Presentation, Business Logic, and Data Access Object (DAO) layers.",
+                        "Leveraged Java Stream API and Lambda functions for complex payroll and department analytics.",
+                        "Implemented robust validation, custom exception handling, and clean OOP polymorphism."
+                    ]
+                },
+                tags: ["Java OOP", "DAO Pattern", "Stream API", "Clean Architecture"]
+            },
+            {
+                id: "academic-risk",
+                icon: "shield-alert",
+                accent: "neonCyan",
+                badge: "DATA SCIENCE & PRIVACY LAW",
+                title: {
+                    vi: "Dự Báo Sớm Rủi Ro Học Tập & Bảo Vệ Dữ Liệu Cá Nhân",
+                    en: "Early Academic Risk Prediction & Privacy Compliance"
+                },
+                shortDesc: {
+                    vi: "Nghiên cứu ứng dụng Big Data & Machine Learning dự báo sớm rủi ro học tập của sinh viên tuân thủ Nghị định 13/2023/NĐ-CP.",
+                    en: "Research on Big Data Analytics & Machine Learning for early student risk detection in compliance with Decree 13/2023/NĐ-CP."
+                },
+                specs: {
+                    vi: [
+                        "Phân tích luồng dữ liệu học tập nhằm phát hiện sớm sinh viên có nguy cơ chậm tiến độ.",
+                        "Áp dụng các nguyên tắc ẩn danh hóa và bảo vệ dữ liệu cá nhân theo Nghị định 13/2023/NĐ-CP của Chính phủ.",
+                        "Kết hợp góc nhìn An toàn thông tin vào quy trình thu thập và huấn luyện mô hình dữ liệu."
+                    ],
+                    en: [
+                        "Analyzed academic telemetry to identify early indicators of student performance drop.",
+                        "Enforced data anonymization and privacy safeguards under Vietnam's Decree 13/2023/NĐ-CP.",
+                        "Integrated SecOps privacy-by-design principles into the analytics pipeline."
+                    ]
+                },
+                tags: ["Big Data", "Machine Learning", "Decree 13/2023/NĐ-CP", "Data Privacy"]
+            },
+            {
+                id: "hardware-lab",
+                icon: "cpu",
+                accent: "neonPurple",
+                badge: "HARDWARE & LOW-LEVEL",
+                title: {
+                    vi: "Phòng Lab Điện Tử Tương Tự & Kiến Trúc Vi Xử Lý x86",
+                    en: "Analog Electronics Lab & x86 Low-Level Architecture"
+                },
+                shortDesc: {
+                    vi: "Thiết kế mạch khuếch đại BJT, nguồn ổn áp LM317, đo kiểm sóng Oscilloscope và lập trình hợp ngữ x86 Assembly.",
+                    en: "Designed BJT amplifier circuits, LM317 voltage regulators, oscilloscope signal diagnostics, and x86 Assembly programming."
+                },
+                specs: {
+                    vi: [
+                        "Mô phỏng mạch trên NI Multisim, tính toán phân cực tĩnh (Q-point) cho Transistor BJT và chế tạo PCB.",
+                        "Đo đạc độ gợn sóng (Ripple), đáp ứng tần số bằng máy hiện sóng (Oscilloscope) và máy phát sóng.",
+                        "Thao tác trực tiếp thanh ghi CPU, bộ nhớ và ngắt hệ thống bằng ngôn ngữ x86 Assembly & C/C++."
+                    ],
+                    en: [
+                        "Simulated circuits in NI Multisim, calculated BJT DC biasing (Q-point), and prototyped PCBs.",
+                        "Performed real-time waveform & ripple analysis using digital oscilloscopes and signal generators.",
+                        "Manipulated CPU registers, flags, and memory addressing via x86 Assembly and C/C++."
+                    ]
+                },
+                tags: ["x86 Assembly", "BJT Amplifiers", "LM317", "NI Multisim", "Oscilloscope"]
+            }
+        ];
+
+        function renderProjects() {
+            const container = document.getElementById('projects-container');
+            container.innerHTML = projectsData.map((p, idx) => `
+                <div onclick="openProjectModal('${p.id}')" class="tilt-card cyber-glass rounded-2xl p-6 flex flex-col justify-between cursor-pointer group interactive-el">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10 font-mono text-[10px] text-${p.accent} tracking-wider">${p.badge}</span>
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-400 group-hover:text-neonCyan group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-white group-hover:text-neonCyan transition">${p.title[currentLang]}</h3>
+                        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">${p.shortDesc[currentLang]}</p>
+                    </div>
+                    <div class="pt-5 mt-5 border-t border-white/10 flex flex-wrap gap-1.5">
+                        ${p.tags.map(t => `<span class="px-2 py-0.5 rounded bg-obsidian/90 border border-white/10 font-mono text-[10px] text-slate-300">${t}</span>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+            initTiltCards();
+        }
+
+        function openProjectModal(id) {
+            playSound('click');
+            const proj = projectsData.find(p => p.id === id);
+            if (!proj) return;
+            document.getElementById('modal-badge').textContent = proj.badge;
+            document.getElementById('modal-title').textContent = proj.title[currentLang];
+            document.getElementById('modal-desc').textContent = proj.shortDesc[currentLang];
+            document.getElementById('modal-specs').innerHTML = proj.specs[currentLang].map(s => `<li>${s}</li>`).join('');
+            document.getElementById('modal-tags').innerHTML = proj.tags.map(t => `<span class="px-2.5 py-1 rounded bg-neonCyan/10 border border-neonCyan/30 font-mono text-xs text-neonCyan">${t}</span>`).join('');
+            const modal = document.getElementById('project-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeProjectModal() {
+            playSound('click');
+            const modal = document.getElementById('project-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        document.getElementById('project-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'project-modal') closeProjectModal();
+        });
+
+        /* ==========================================================================
+           3. LANGUAGE SWITCHER & TYPEWRITER EFFECT
+           ========================================================================== */
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typewriterEl = document.getElementById('typewriter-text');
+
+        function runTypewriter() {
+            const roles = i18nData[currentLang].roles;
+            const currentRole = roles[roleIndex % roles.length];
+
+            if (isDeleting) {
+                charIndex--;
+            } else {
+                charIndex++;
+            }
+
+            typewriterEl.textContent = currentRole.substring(0, charIndex);
+
+            let speed = isDeleting ? 35 : 70;
+
+            if (!isDeleting && charIndex === currentRole.length) {
+                speed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                speed = 400;
+            }
+
+            setTimeout(runTypewriter, speed);
+        }
+
+        document.getElementById('lang-toggle').addEventListener('click', () => {
+            playSound('click');
+            currentLang = currentLang === 'vi' ? 'en' : 'vi';
+            document.getElementById('lang-label').textContent = currentLang.toUpperCase();
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18nData[currentLang][key]) {
+                    el.innerHTML = i18nData[currentLang][key];
+                }
+            });
+            renderProjects();
+        });
+
+        /* ==========================================================================
+           4. SKILL FILTER TABS
+           ========================================================================== */
+        function filterSkills(category) {
+            playSound('click');
+            document.querySelectorAll('.skill-tab').forEach(tab => {
+                const isActive = tab.getAttribute('data-tab') === category;
+                tab.className = isActive 
+                    ? 'skill-tab active px-3.5 py-1.5 rounded-lg bg-neonCyan text-obsidian font-bold transition interactive-el'
+                    : 'skill-tab px-3.5 py-1.5 rounded-lg cyber-glass text-slate-300 hover:text-white transition interactive-el';
+            });
+
+            document.querySelectorAll('.skill-card').forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        /* ==========================================================================
+           5. INTERACTIVE LINUX BASH TERMINAL EMULATOR
+           ========================================================================== */
+        const terminalBody = document.getElementById('terminal-body');
+        const terminalInput = document.getElementById('terminal-input');
+
+        const asciiBanner = `
+<pre class="text-neonCyan leading-tight text-[10px] sm:text-xs font-mono">
+  ____  _   _ _     _       ____            ___            
+ |  _ \\| | | | |   (_)_ __ |  _ \\ ___  ___ / _ \\ _ __  ___ 
+ | | | | |_| | |   | | '_ \\| |_) / _ \\/ __| | | | '_ \\/ __|
+ | |_| |  _  | |___| | | | |  _ <  __/ (__| |_| | |_) \\__ \\
+ |____/|_| |_|_____|_|_| |_|_| \\_\\___|\\___|\\___/| .__/|___/
+                                                |_|        
+</pre>
+<div class="text-slate-300">Welcome to <span class="text-neonEmerald font-bold">Parrot SecOps Lab OS 6.x LTS</span> (GNU/Linux x86_64)</div>
+<div class="text-slate-400 text-xs">User: <span class="text-white">Đặng Hoàng Lĩnh</span> | MSSV: <span class="text-neonCyan">25162073</span> | University: <span class="text-white">HCMUTE</span></div>
+<div class="text-slate-400 text-xs">Type <span class="text-neonCyan font-bold">'help'</span> to view available commands, or click the quick chips above.</div>
+`;
+
+        function printTerminal(htmlContent) {
+            const div = document.createElement('div');
+            div.innerHTML = htmlContent;
+            terminalBody.appendChild(div);
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+        }
+
+        function runTerminalCommand(rawCmd) {
+            playSound('terminal');
+            const cmd = rawCmd.trim().toLowerCase();
+            
+            printTerminal(`<div class="mt-2"><span class="text-neonEmerald font-bold">linh@secops-lab</span>:<span class="text-neonCyan font-bold">~#</span> <span class="text-white">${rawCmd}</span></div>`);
+
+            if (cmd === 'help') {
+                printTerminal(`
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-1 text-xs bg-white/5 p-3 rounded-lg border border-white/10 mt-1">
+                        <div><span class="text-neonCyan font-bold">whoami</span>     - Display operator profile & MSSV</div>
+                        <div><span class="text-neonCyan font-bold">neofetch</span>   - System & hardware workstation info</div>
+                        <div><span class="text-neonCyan font-bold">skills</span>     - List technical arsenal & stack</div>
+                        <div><span class="text-neonCyan font-bold">projects</span>   - List active lab deployments</div>
+                        <div><span class="text-neonCyan font-bold">certs</span>      - Certification roadmap & training</div>
+                        <div><span class="text-neonCyan font-bold">ping</span>       - Test network routing latency</div>
+                        <div><span class="text-neonCyan font-bold">clear</span>      - Clear terminal screen</div>
+                    </div>
+                `);
+            } else if (cmd === 'whoami') {
+                printTerminal(`
+                    <div class="text-slate-200 pl-2 border-l-2 border-neonCyan space-y-1 mt-1">
+                        <div><strong>Full Name:</strong> Đặng Hoàng Lĩnh</div>
+                        <div><strong>Student ID (MSSV):</strong> 25162073</div>
+                        <div><strong>Institution:</strong> Ho Chi Minh City University of Technology and Education (HCMUTE)</div>
+                        <div><strong>Major:</strong> Information Security (An Toàn Thông Tin)</div>
+                        <div><strong>Focus:</strong> System Administration, Enterprise Networking & Defense-in-Depth SecOps</div>
+                    </div>
+                `);
+            } else if (cmd === 'neofetch') {
+                printTerminal(`
+                    <div class="flex flex-col sm:flex-row gap-4 items-start bg-white/5 p-3 rounded-lg border border-white/10 mt-1 font-mono text-xs">
+                        <pre class="text-neonEmerald leading-tight">
+   /\\
+  /  \\    OS: Parrot Security OS / Win11 Dual-Drive
+ / /\\ \\   Host: HCMUTE-SecOps-Workstation
+/ /__\\ \\  Kernel: 6.1.0-parrot1-amd64
+\\/____\\/  Uptime: 42 days, 13 hours
+                        </pre>
+                        <div class="space-y-0.5 text-slate-300">
+                            <div><span class="text-neonCyan font-bold">linh@secops-lab</span></div>
+                            <div>-------------------------</div>
+                            <div><strong class="text-neonEmerald">Virtualization:</strong> EVE-NG Pro (Cisco IOU/IOL, MikroTik)</div>
+                            <div><strong class="text-neonEmerald">Shell:</strong> bash 5.2.15 / zsh</div>
+                            <div><strong class="text-neonEmerald">Knowledge Vault:</strong> Obsidian + Multi-Agent AI</div>
+                            <div><strong class="text-neonEmerald">Target Cert:</strong> CompTIA Linux+ (XK0-005)</div>
+                        </div>
+                    </div>
+                `);
+            } else if (cmd === 'skills') {
+                printTerminal(`
+                    <div class="space-y-1 text-xs mt-1">
+                        <div class="text-neonCyan font-bold">[+] SYSTEM ADMINISTRATION:</div>
+                        <div class="pl-3 text-slate-300">Linux (Parrot, Ubuntu, RHEL), Bash Scripting, LVM, systemd, Firewall Hardening</div>
+                        <div class="text-neonEmerald font-bold mt-1">[+] NETWORKING & INFRASTRUCTURE:</div>
+                        <div class="pl-3 text-slate-300">IPv4/IPv6, VLSM Subnetting, OSPF, BGP, VLANs, EVE-NG, MikroTik Load Balancing</div>
+                        <div class="text-neonPurple font-bold mt-1">[+] SECURITY, DEV & HARDWARE:</div>
+                        <div class="pl-3 text-slate-300">Java (OOP/DAO/Streams), C/C++, x86 Assembly, BJT Amplifiers, LM317, Multisim</div>
+                    </div>
+                `);
+            } else if (cmd === 'projects') {
+                printTerminal(`
+                    <div class="space-y-1 text-xs mt-1">
+                        <div>1. <span class="text-neonCyan font-bold">Enterprise Virtual Network Lab</span> (EVE-NG, Cisco OSPF/BGP/VLAN, MikroTik)</div>
+                        <div>2. <span class="text-neonPurple font-bold">Multi-Agent AI Second Brain</span> (Obsidian PKM + Custom Agent Protocols)</div>
+                        <div>3. <span class="text-neonEmerald font-bold">HR Management System</span> (Java OOP, Layered DAO, Stream API)</div>
+                        <div>4. <span class="text-amber-400 font-bold">Early Academic Risk Prediction</span> (Big Data & Decree 13/2023/NĐ-CP)</div>
+                        <div>5. <span class="text-pink-400 font-bold">Analog Electronics & x86 Lab</span> (BJT, LM317, Oscilloscope, Assembly)</div>
+                    </div>
+                `);
+            } else if (cmd === 'certs') {
+                printTerminal(`
+                    <div class="text-xs text-slate-200 mt-1">
+                        <span class="text-neonEmerald">[ACTIVE PREP]</span> CompTIA Linux+ (Exam Code: XK0-005) - System Management, Security, Scripting & Containers.
+                    </div>
+                `);
+            } else if (cmd.startsWith('ping')) {
+                printTerminal(`
+                    <div class="text-xs text-slate-300 mt-1 space-y-0.5">
+                        <div>PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.</div>
+                        <div>64 bytes from 8.8.8.8: icmp_seq=1 ttl=118 time=11.4 ms (via MikroTik-WAN1)</div>
+                        <div>64 bytes from 8.8.8.8: icmp_seq=2 ttl=118 time=10.9 ms (via OSPF-Area0)</div>
+                        <div class="text-neonEmerald">--- 8.8.8.8 ping statistics: 0% packet loss, route healthy ---</div>
+                    </div>
+                `);
+            } else if (cmd === 'clear') {
+                terminalBody.innerHTML = '';
+            } else if (cmd !== '') {
+                printTerminal(`<div class="text-rose-400 text-xs">bash: ${rawCmd}: command not found. Type <span class="text-neonCyan">'help'</span> for available commands.</div>`);
+            }
+        }
+
+        terminalInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const val = terminalInput.value;
+                terminalInput.value = '';
+                runTerminalCommand(val);
+            }
+        });
+
+        /* ==========================================================================
+           6. 3D TILT CARDS & CUSTOM MAGNETIC CURSOR
+           ========================================================================== */
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorRing = document.getElementById('cursor-ring');
+
+        window.addEventListener('mousemove', (e) => {
+            cursorDot.style.left = `${e.clientX}px`;
+            cursorDot.style.top = `${e.clientY}px`;
+            cursorRing.animate({
+                left: `${e.clientX}px`,
+                top: `${e.clientY}px`
+            }, { duration: 180, fill: "forwards" });
+        });
+
+        function initTiltCards() {
+            document.querySelectorAll('.tilt-card').forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = ((y - centerY) / centerY) * -6;
+                    const rotateY = ((x - centerX) / centerX) * 6;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+                });
+            });
+
+            document.querySelectorAll('.interactive-el').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    document.body.classList.add('cursor-hover');
+                    playSound('hover');
+                });
+                el.addEventListener('mouseleave', () => {
+                    document.body.classList.remove('cursor-hover');
+                });
+            });
+        }
+
+        /* ==========================================================================
+           7. HTML5 CANVAS NETWORK TOPOLOGY & PACKET ROUTING ANIMATION
+           ========================================================================== */
+        const canvas = document.getElementById('network-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let ripples = [];
+        let mouse = { x: null, y: null, radius: 150 };
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = Math.min(Math.floor((canvas.width * canvas.height) / 16000), 85);
+            const colors = ['#00f2fe', '#10b981', '#8b5cf6'];
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.65,
+                    vy: (Math.random() - 0.5) * 0.65,
+                    size: Math.random() * 2 + 1.2,
+                    color: colors[i % colors.length]
+                });
+            }
+        }
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        window.addEventListener('click', (e) => {
+            ripples.push({ x: e.clientX, y: e.clientY, radius: 2, alpha: 0.7 });
+        });
+
+        function animateNetwork() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw Click Ripples
+            for (let i = ripples.length - 1; i >= 0; i--) {
+                const r = ripples[i];
+                ctx.beginPath();
+                ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
+                ctx.strokeStyle = `rgba(0, 242, 254, ${r.alpha})`;
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+                r.radius += 3;
+                r.alpha -= 0.02;
+                if (r.alpha <= 0) ripples.splice(i, 1);
+            }
+
+            // Update & Draw Nodes
+            for (let i = 0; i < particles.length; i++) {
+                const p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.fill();
+
+                // Connect nearby nodes
+                for (let j = i + 1; j < particles.length; j++) {
+                    const p2 = particles[j];
+                    const dx = p.x - p2.x;
+                    const dy = p.y - p2.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 135) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(0, 242, 254, ${(1 - dist / 135) * 0.22})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
+                }
+
+                // Connect to mouse cursor
+                if (mouse.x !== null) {
+                    const dx = p.x - mouse.x;
+                    const dy = p.y - mouse.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < mouse.radius) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.strokeStyle = `rgba(16, 185, 129, ${(1 - dist / mouse.radius) * 0.45})`;
+                        ctx.lineWidth = 1.1;
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(animateNetwork);
+        }
+
+        /* ==========================================================================
+           8. CLIPBOARD & SINGLE-FILE HTML EXPORT
+           ========================================================================== */
+        function copyToClipboard(text) {
+            playSound('click');
+            const tempInput = document.createElement('textarea');
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').textContent = `Đã sao chép: ${text}`;
+            toast.classList.remove('hidden');
+            toast.classList.add('flex');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+                toast.classList.remove('flex');
+            }, 2600);
+        }
+
+        function downloadPortfolioHTML() {
+            playSound('click');
+            const htmlContent = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+            const blob = new Blob([htmlContent], { type: "text/html;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = "Dang_Hoang_Linh_SecOps_Portfolio.html";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        document.getElementById('download-btn').addEventListener('click', downloadPortfolioHTML);
+
+        /* ==========================================================================
+           9. INITIALIZATION ON WINDOW LOAD
+           ========================================================================== */
+        window.onload = function () {
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            animateNetwork();
+            renderProjects();
+            runTypewriter();
+            printTerminal(asciiBanner);
+        };
+    </script>
+</body>
+</html>
